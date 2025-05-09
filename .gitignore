@@ -1,7 +1,12 @@
+# Environment variables
+.env
+.env.local
+.env.save
+
 # Python
 __pycache__/
 *.py[cod]
-*.class
+*$py.class
 *.so
 .Python
 env/
@@ -19,19 +24,23 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Virtual Environment
 venv/
+assistantEnv/
 ENV/
 
-# Environment variables
-.env
+# Logs
+*.log
+logs/
+report/
 
 # IDE files
 .idea/
 .vscode/
 *.swp
 *.swo
-
-# Cache
-.langchain.db
+.DS_Store

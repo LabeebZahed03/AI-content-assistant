@@ -65,7 +65,15 @@ def main():
     """Main entry point for the CLI."""
     check_api_key()
     
-    parser = argparse.ArgumentParser(description="AI Content Assistant for Wellness Strategy")
+    parser = argparse.ArgumentParser(
+        description="AI Content Assistant for Wellness Strategy",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Examples:
+  python -m assistant.cli --file sample_content.txt --all
+  python -m assistant.cli --text "Custom wellness content" --summarize
+  python -m assistant.cli --file sample_content.txt --question "What is wellness?"
+"""
+    )
     
     # Input options
     input_group = parser.add_mutually_exclusive_group(required=True)
@@ -89,10 +97,8 @@ def main():
     content = ""
     if args.file:
         content = read_from_file(args.file)
-        print(f"DEBUG: First 50 chars: '{content[:50]}...'")
     else:
         content = args.text
-        print(f"DEBUG: First 50 chars: '{content[:50]}...'")
     
     if not content:
         console.print("[bold red]Error: Empty content provided[/bold red]")
@@ -103,7 +109,6 @@ def main():
     
     if args.all:
         default_question = "What are the benefits of wellness programs for companies?"
-        print(f"DEBUG: Sending {len(content)} chars to process_all")
         results = process_all(content, question=default_question)
     else:
         results = process_selected(

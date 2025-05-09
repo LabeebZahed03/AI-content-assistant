@@ -1,17 +1,16 @@
 """Core LLM functions for the AI Content Assistant."""
 
 import os
-from typing import List, Optional, Any, Union, Dict
+from typing import List
 from langchain_community.chat_models import ChatOpenAI
 from langchain_community.llms import HuggingFacePipeline
 from langchain.prompts import PromptTemplate
-from langchain_core.messages import HumanMessage, AIMessage
-import openai
-from dotenv import load_dotenv
+from langchain_core.messages import HumanMessage
 import logging
+from dotenv import load_dotenv
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, 
+                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Load environment variables
@@ -64,8 +63,6 @@ def should_use_fallback():
 # Add a wrapper function for LLM calls with fallback
 def call_llm_with_fallback(prompt_content: str, temperature: float = 0.7) -> str:
     """Call LLM with fallback mechanism."""
-    logger.debug(f"Prompt sent to LLM: {prompt_content[:100]}...")
-    
     if should_use_fallback():
         logger.info("Using Hugging Face model (forced)")
         hf_llm = init_hf_pipeline()
@@ -100,12 +97,9 @@ def summarize(text: str) -> str:
         return "Error: No content provided for summarization."
     
     logger.info(f"Summarizing text with length: {len(text)}")
-    logger.info(f"First 50 chars: '{text[:50]}...'")
     
     prompt = PromptTemplate(template=SUMMARY_TEMPLATE, input_variables=["text"])
     prompt_content = prompt.format(text=text)
-    
-    logger.info(f"Prompt length: {len(prompt_content)}")
     
     return call_llm_with_fallback(prompt_content, temperature=0.7)
 
