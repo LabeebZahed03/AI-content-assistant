@@ -1,4 +1,43 @@
-# AI Content Assistant for Wellness Strategy
+## Demo Output
+
+Here's a sample of the AI Content Assistant processing the wellness content:
+
+```
+Read 476 characters from sample_content.txt
+Processing content...
+Results:
+╭─────────────────────────────────────────────────────────────────────── Summary ────────────────────────────────────────────────────────────────────────╮
+│ Wellness is a comprehensive approach to achieving overall health through practices like mindfulness, nutrition, and exercise. Prioritizing wellness    │
+│ can lead to better professional performance and companies benefit from investing in employee wellness programs through increased productivity and a    │
+│ positive workplace culture.                                                                                                                            │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                             Generated Titles                              
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Title                                                                   ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 1. Unlocking the Power of Wellness: A Holistic Approach to Health       │
+│ 2. Enhancing Performance and Satisfaction: The Impact of Wellness       │
+│ 3. Investing in Wellness: The Key to a Healthy and Productive Workplace │
+└─────────────────────────────────────────────────────────────────────────┘
+╭───────────────────────────────────────────────────────────────────────── Q&A ──────────────────────────────────────────────────────────────────────────╮
+│ increased productivity, reduced absenteeism, and a positive workplace culture.                                                                         │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                                     Recommendations                                                                      
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Recommendation                                                                                                                                         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ • Offer a variety of wellness activities and resources to cater to different interests and needs of employees, such as yoga classes, nutrition         │
+│ workshops, mental health resources, and fitness challenges.                                                                                            │
+│ • Provide incentives or rewards for employees who actively participate in the wellness program, such as gift cards, extra time off, or discounts on    │
+│ health-related services. This can help motivate employees to engage in the program and reap the benefits of improved health and well-being.            │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+The assistant successfully processes the wellness content to provide:
+1. A concise summary
+2. Creative title suggestions
+3. Answers to specific questions
+4. Actionable recommendations# AI Content Assistant for Wellness Strategy
 
 A Python-based tool that uses LLM technology to process and enhance wellness-related content.
 

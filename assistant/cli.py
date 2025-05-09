@@ -13,8 +13,12 @@ console = Console()
 def read_from_file(file_path: str) -> str:
     """Read content from a file."""
     try:
-        with open(file_path, "r") as f:
-            return f.read()
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
+            print(f"Read {len(content)} characters from {file_path}")
+            if not content.strip():
+                print(f"Warning: File {file_path} appears to be empty or contains only whitespace")
+            return content
     except Exception as e:
         console.print(f"[bold red]Error reading file: {e}[/bold red]")
         sys.exit(1)
@@ -29,7 +33,10 @@ def display_results(results):
         title_table.add_column("Title")
         
         for i, title in enumerate(results["titles"], 1):
-            title_table.add_row(f"{i}. {title}")
+            clean_title = title.strip()
+            clean_title = clean_title.lstrip("0123456789.- •*").strip()
+            clean_title = clean_title.strip('"\'')
+            title_table.add_row(f"{i}. {clean_title}")
         
         console.print(title_table)
     
@@ -41,7 +48,9 @@ def display_results(results):
         rec_table.add_column("Recommendation")
         
         for i, rec in enumerate(results["recommendations"], 1):
-            rec_table.add_row(f"• {rec}")
+            clean_rec = rec.strip()
+            clean_rec = clean_rec.lstrip("0123456789.- •*").strip()
+            rec_table.add_row(f"• {clean_rec}")
         
         console.print(rec_table)
 
@@ -54,7 +63,6 @@ def check_api_key():
 
 def main():
     """Main entry point for the CLI."""
-    # Check API key
     check_api_key()
     
     parser = argparse.ArgumentParser(description="AI Content Assistant for Wellness Strategy")
@@ -74,16 +82,17 @@ def main():
     
     args = parser.parse_args()
     
-    # Handle force fallback flag
     if args.force_fallback:
         os.environ["FORCE_FALLBACK"] = "true"
         console.print("[yellow]Forcing use of fallback model[/yellow]")
     
-    # Get content
+    content = ""
     if args.file:
         content = read_from_file(args.file)
+        print(f"DEBUG: First 50 chars: '{content[:50]}...'")
     else:
         content = args.text
+        print(f"DEBUG: First 50 chars: '{content[:50]}...'")
     
     if not content:
         console.print("[bold red]Error: Empty content provided[/bold red]")
@@ -94,6 +103,7 @@ def main():
     
     if args.all:
         default_question = "What are the benefits of wellness programs for companies?"
+        print(f"DEBUG: Sending {len(content)} chars to process_all")
         results = process_all(content, question=default_question)
     else:
         results = process_selected(
