@@ -29,21 +29,22 @@ RECS_TEMPLATE = "Give {n} actionable recommendations for a company looking to im
 def init_hf_pipeline():
     """Initialize a Hugging Face pipeline for text generation."""
     try:
-        from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+        from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
         import torch
         
-        model_name = "google/flan-t5-large"
+        # Use a smaller model suitable for text generation tasks
+        model_name = "google/flan-t5-base"  # Smaller model, faster loading
         
         logger.info(f"Loading Hugging Face model: {model_name}")
         tokenizer = AutoTokenizer.from_pretrained(model_name)
-        model = AutoModelForCausalLM.from_pretrained(
+        model = AutoModelForSeq2SeqLM.from_pretrained(
             model_name, 
             torch_dtype=torch.float16,
             device_map="auto"
         )
         
         pipe = pipeline(
-            "text-generation",
+            "text2text-generation",
             model=model,
             tokenizer=tokenizer,
             max_length=512
